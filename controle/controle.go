@@ -41,6 +41,6 @@ func Inserir(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	http.Redirect(w, r, "/Tela", 301)
+	http.Redirect(w, r, "/bemvido.html", 301)
 
 }
