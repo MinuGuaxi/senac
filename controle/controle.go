@@ -41,7 +41,7 @@ func Inserir(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	http.Redirect(w, r, "/Tela", http.StatusSeeOther)
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
 
@@ -57,7 +57,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 		if ok {
 			// login válido
-			http.Redirect(w, r, "Tela", http.StatusSeeOther)
+			http.Redirect(w, r, "/Tela", http.StatusSeeOther)
 			return
 		}
 
@@ -67,5 +67,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Se for GET, exibe a tela
-	front.ExecuteTemplate(w, "Tela", nil)
+	front.ExecuteTemplate(w, "/Tela", nil)
 }
