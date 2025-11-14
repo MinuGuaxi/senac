@@ -2,7 +2,6 @@ package modelo
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	dbconn "modulo/db"
 )
@@ -38,24 +37,18 @@ func AutenticarUsuario(email string, senha string) (bool, error) {
 
 	var senhaHash string
 	query := "SELECT senha FROM usuarios WHERE email=$1"
-
 	err := db.QueryRow(query, email).Scan(&senhaHash)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			fmt.Println("Usuário não encontrado:", email)
 			return false, nil
 		}
-		fmt.Println("Erro ao executar Query:", err)
 		return false, err
 	}
-
-	fmt.Println("Senha encontrada:", senhaHash)
 
 	if senhaHash == senha {
 		return true, nil
 	}
 
-	fmt.Println("Senha incorreta:", email)
 	return false, nil
 }
