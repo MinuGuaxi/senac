@@ -53,7 +53,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		ok, _ := modelo.AutenticarUsuario(email, senha)
 
 		if ok {
-			http.Redirect(w, r, "/Tela", http.StatusSeeOther)
+			http.Redirect(w, r, "Tela", http.StatusSeeOther)
 			return
 		}
 
@@ -61,5 +61,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	front.ExecuteTemplate(w, "/Tela", nil)
+	front.ExecuteTemplate(w, "Tela", nil)
 }
