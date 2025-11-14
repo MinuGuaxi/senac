@@ -61,5 +61,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	front.ExecuteTemplate(w, "Tela_Login", nil)
+	front.ExecuteTemplate(w, "/Tela", nil)
 }
