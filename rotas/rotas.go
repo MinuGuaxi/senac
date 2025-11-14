@@ -11,4 +11,6 @@ func CarregarRotas() {
 	http.HandleFunc("/Cadastro", controle.Cadastro)
 	http.HandleFunc("/Inserir", controle.Inserir)
 	http.HandleFunc("/Tela", controle.Tela)
+	http.HandleFunc("/Login", controle.Login)
+
 }

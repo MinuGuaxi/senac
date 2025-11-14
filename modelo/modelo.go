@@ -33,7 +33,7 @@ func Inserir(nome string, email string, senha string) {
 	defer db.Close()
 }
 
-func AutenticarUsuario(nome string, email string, senha string) (bool, error) {
+func AutenticarUsuario(email string, senha string) (bool, error) {
 	db := dbconn.Acesso()
 
 	var senhaHash string
