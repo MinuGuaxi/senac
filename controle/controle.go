@@ -57,7 +57,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 		if ok {
 			// login válido
-			http.Redirect(w, r, "/Tela_Login", http.StatusSeeOther)
+			http.Redirect(w, r, "Tela", http.StatusSeeOther)
 			return
 		}
 
