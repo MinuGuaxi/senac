@@ -1,0 +1,142 @@
+{{  define "Tela" }}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bem-vindo — Naldo</title>
+  <style>
+    :root{
+      --speed: 8s; /* duração padrão */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      display:grid;
+      place-items:center;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #fff;
+      text-align:center;
+      padding:2rem;
+      /* animação de gradiente - usa variáveis para poder controlar via JS */
+      background: linear-gradient(135deg, #ff7eb3, #7afcff);
+      background-size: 400% 400%;
+      animation: bgAnimate var(--speed) ease-in-out infinite;
+      transition: color .3s ease;
+    }
+
+    @keyframes bgAnimate{
+      0%{background-position:0% 50%}
+      25%{background-position:50% 50%}
+      50%{background-position:100% 50%}
+      75%{background-position:50% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .card{
+      backdrop-filter: blur(8px) saturate(140%);
+      background: rgba(0,0,0,0.18);
+      padding:2.25rem 2.5rem;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:880px;
+      width:100%;
+    }
+
+    h1{
+      margin:0 0 .25rem 0;
+      font-size:clamp(2rem,4vw,3.25rem);
+      letter-spacing: -0.02em;
+    }
+    p.lead{margin:0 0 1.25rem 0;opacity:.95}
+
+    .controls{
+      display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:1rem
+    }
+
+    .btn{
+      appearance:none;border:0;padding:.6rem .9rem;border-radius:10px;font-weight:600;cursor:pointer;user-select:none;
+      background:rgba(255,255,255,0.14);color:#fff;backdrop-filter:blur(4px)
+    }
+    .btn:active{transform:translateY(1px)}
+
+    .label{font-size:0.85rem;opacity:.95}
+    input[type=range]{width:180px}
+
+    footer{margin-top:1.25rem;font-size:.85rem;opacity:.9}
+
+    /* modo escuro claro (apenas muda cor do texto para contraste) */
+    .inverse-text{color:#0f172a}
+
+    @media (max-width:520px){
+      .controls{flex-direction:column}
+      input[type=range]{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Bem‑vindo!</h1>
+    <p class="lead">Esta página alterna as cores do fundo automaticamente. Use os controles para pausar ou ajustar a velocidade.</p>
+
+    <div class="controls">
+      <button id="toggle" class="btn">Pausar</button>
+
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <label class="label" for="speed">Velocidade (segundos):</label>
+        <input id="speed" type="range" min="2" max="30" value="8">
+        <span id="speedVal">8s</span>
+      </div>
+
+      <button id="palette" class="btn">Alternar Paleta</button>
+    </div>
+
+    <footer>Feito com ❤️ — arraste o slider para mudar velocidade.</footer>
+  </div>
+
+  <script>
+    const body = document.body;
+    const toggle = document.getElementById('toggle');
+    const speed = document.getElementById('speed');
+    const speedVal = document.getElementById('speedVal');
+    const palette = document.getElementById('palette');
+
+    let playing = true;
+    const palettes = [
+      ['#ff7eb3','#7afcff'],
+      ['#ff9a9e','#fad0c4'],
+      ['#a18cd1','#fbc2eb'],
+      ['#89f7fe','#66a6ff'],
+      ['#fbc2eb','#a6c1ee'],
+      ['#fddb92','#d1fdff']
+    ];
+    let current = 0;
+
+    function applyPalette(i){
+      const a = palettes[i % palettes.length];
+      body.style.background = `linear-gradient(135deg, ${a[0]}, ${a[1]})`;
+    }
+
+    toggle.addEventListener('click', ()=>{
+      playing = !playing;
+      body.style.animationPlayState = playing ? 'running' : 'paused';
+      toggle.textContent = playing ? 'Pausar' : 'Retomar';
+    });
+
+    speed.addEventListener('input', (e)=>{
+      const s = e.target.value + 's';
+      document.documentElement.style.setProperty('--speed', s);
+      speedVal.textContent = s;
+    });
+
+    palette.addEventListener('click', ()=>{
+      current = (current + 1) % palettes.length;
+      applyPalette(current);
+    });
+
+    // inicia com a paleta 0
+    applyPalette(0);
+  </script>
+</body>
+</html>
+{{ end }}

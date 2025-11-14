@@ -1,14 +1,14 @@
 package controle
 
 import (
-	"text/template"
-	"net/http"
 	modelo "modulo/modelo"
+	"net/http"
+	"text/template"
 )
 
 var front *template.Template
 
-func init(){
+func init() {
 	var err error
 	front, err = template.ParseGlob("template/*.html")
 	if err != nil {
@@ -16,13 +16,18 @@ func init(){
 	}
 }
 
-func Tela_Login(w http.ResponseWriter, r *http.Request){
+func Tela_Login(w http.ResponseWriter, r *http.Request) {
 	front.ExecuteTemplate(w, "Tela_Login", nil)
 }
 
 func Cadastro(w http.ResponseWriter, r *http.Request) {
 	front.ExecuteTemplate(w, "Cadastro", nil)
 }
+
+func Tela(w http.ResponseWriter, r *http.Request) {
+	front.ExecuteTemplate(w, "Tela", nil)
+}
+
 func Inserir(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		nome := r.FormValue("nome")
@@ -36,6 +41,6 @@ func Inserir(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	http.Redirect(w, r, "/index.html", 301)
+	http.Redirect(w, r, "Tela", 301)
 
 }
