@@ -1,0 +1,36 @@
+{{ define "Tela_Login"}}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content= "IE=edge">
+		<title>Tela de Login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/static/css/login.css">
+	</head>
+	<body>
+        <div class="login-container">
+            <h1>Login</h1>
+            <form id="loginform">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Digite seu email" required>
+                </div>
+
+                 <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit">Entrar</button>
+                <br><br>
+
+                <a href="Cadastro">Criar conta</a>
+
+                <p id="message"></p>
+            </form>
+        </div>
+	<script src="static/js/script.js"></script>
+</body>
+</html>
+{{ end }}
