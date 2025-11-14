@@ -30,15 +30,10 @@ func Inserir(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 		senha := r.FormValue("senha")
 
-		convertsenha, err := strconv.Atoi(senha)
-		if err != nil {
-			panic(err.Error())
-		}
-
 		modelo.Inserir(
 			nome,
 			email,
-			convertsenha,
+			senha,
 		)
 	}
 
