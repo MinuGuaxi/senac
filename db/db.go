@@ -7,7 +7,7 @@ import (
 )
 
 func Acesso() *sql.DB {
-	var conexao = "user=dba dbname=meubanco host=localhost password=123 sslmode=disable"
+	var conexao = "user=dba dbname=dba host=localhost password=123 sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		panic(err)
