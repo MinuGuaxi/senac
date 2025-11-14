@@ -46,26 +46,20 @@ func Inserir(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-
-	// Se vier um POST, tente autenticar
 	if r.Method == "POST" {
-
 		email := r.FormValue("email")
 		senha := r.FormValue("senha")
 
 		ok, _ := modelo.AutenticarUsuario(email, senha)
 
 		if ok {
-			// login válido
 			http.Redirect(w, r, "/Tela", http.StatusSeeOther)
 			return
 		}
 
-		// login inválido — volta para a tela de login
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
 
-	// Se for GET, exibe a tela
-	front.ExecuteTemplate(w, "/Tela", nil)
+	front.ExecuteTemplate(w, "Tela_Login", nil)
 }
